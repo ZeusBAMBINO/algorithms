@@ -1,0 +1,64 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Create Exams DataFrame
+dates = pd.date_range(start='2023-01-01', periods=8)
+subjects = ['Math', 'Physics', 'Chemistry', 'English', 'History', 'Biology', 'Geography', 'Computer Science']
+marks = [85, 90, 75, 92, 88, 80, 95, 98]
+exams_df = pd.DataFrame({'Date': dates, 'Subject': subjects, 'Mark': marks})
+
+# Download and process "Online Food" dataset
+url = 'https://raw.githubusercontent.com/mwaskom/seaborn-data/master/online_food_ordering.csv'  # Replace with your download link
+online_food_df = pd.read_csv(url)
+online_food_df.drop(columns=['longitude', 'latitude'], inplace=True)
+
+# Customer with min and max ages
+min_age_customer = online_food_df[online_food_df['Age'] == online_food_df['Age'].min()]
+max_age_customer = online_food_df[online_food_df['Age'] == online_food_df['Age'].max()]
+print("Customer with minimum age:", min_age_customer)
+print("Customer with maximum age:", max_age_customer)
+
+# Mean age by occupation
+mean_age_occupation = online_food_df.groupby('Occupation')['Age'].mean()
+print("Mean age by occupation:\n", mean_age_occupation)
+
+# Mean family size by gender and income
+mean_family_size_gender_income = online_food_df.groupby(['Gender', 'Monthly Income'])['Family Size'].mean()
+print("Mean family size by gender and income:\n", mean_family_size_gender_income)
+
+# Positive feedbacks by marital status and education
+positive_feedbacks_marital_education = online_food_df.groupby(['Marital Status', 'Education'])['Positive Feedbacks'].count()
+print("Positive feedbacks by marital status and education:\n", positive_feedbacks_marital_education)
+
+# Add "Big family" column
+online_food_df['Big Family'] = online_food_df['Family Size'].apply(lambda x: 'True' if x > 4 else 'False')
+
+# Histogram of mean age by education
+mean_age_education = online_food_df.groupby('Education')['Age'].mean()
+mean_age_education.plot(kind='hist', title='Mean Age by Education')
+plt.xlabel('Education Qualifications')
+plt.ylabel('Mean Age')
+plt.show()
+
+# Histogram of positive/negative feedback by gender
+positive_feedback_gender = online_food_df[online_food_df['Gender'] == 'M']['Positive Feedbacks']
+negative_feedback_gender = online_food_df[online_food_df['Gender'] == 'M']['Negative Feedbacks']
+positive_feedback_female = online_food_df[online_food_df['Gender'] == 'F']['Positive Feedbacks']
+negative_feedback_female = online_food_df[online_food_df['Gender'] == 'F']['Negative Feedbacks']
+
+plt.figure(figsize=(10, 6))
+plt.hist([positive_feedback_gender, positive_feedback_female], bins=10, label=['Male Positive', 'Female Positive'], alpha=0.5)
+plt.hist([negative_feedback_gender, negative_feedback_female], bins=10, label=['Male Negative', 'Female Negative'], alpha=0.5)
+plt.xlabel('Number of Feedbacks')
+plt.ylabel('Count')
+plt.title('Positive and Negative Feedbacks by Gender')
+plt.legend()
+plt.show()
+
+# Line plot of positive feedback vs. family size
+positive_feedbacks_family_size = online_food_df.groupby('Family Size')['Positive Feedbacks'].sum()
+plt.plot(positive_feedbacks_family_size.index, positive_feedbacks_family_size.values, marker='o')
+plt.xlabel('Family Size')
+plt.ylabel('Total Positive Feedbacks')
+plt.title('Positive Feedbacks vs. Family Size')
+plt.show()
