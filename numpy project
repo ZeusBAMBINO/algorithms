@@ -1,0 +1,92 @@
+import numpy as np
+
+# Array of 10 zeros
+arr_zeros = np.zeros(10)
+
+# Array of 10 fives
+arr_fives = np.ones(10) * 5
+
+# Array of integers from 10 to 50
+arr_int = np.arange(10, 51)
+
+# Array of even integers from 10 to 50
+arr_even = np.arange(10, 51, 2)
+
+# 3x3 matrix with values from 0 to 8
+matrix = np.arange(9).reshape(3, 3)
+
+# 3x3 identity matrix
+identity_matrix = np.eye(3)
+# Random number between 0 and 1
+random_number = np.random.rand()
+
+# Array of 25 random numbers
+random_array = np.random.rand(25)
+
+# Array of 20 linearly spaced points between 0 and 1
+linspace_array = np.linspace(0, 1, 20)
+# Convert 1D array to 2D array with 2 rows
+
+# Multiply 5x3 and 3x2 matrices
+result_matrix = np.dot(np.random.rand(5, 3), np.random.rand(3, 2))
+
+# Extract odd numbers from 1-10 array
+odd_numbers = arr_int[arr_int % 2 != 0]
+
+# Replace odd numbers with -1 in 1-10 array
+arr_int[arr_int % 2 != 0] = -1
+
+# Convert 1D array to boolean array (positive values become True)
+bool_array = arr_int > 0
+
+# Replace even numbers with their negative
+arr_int[arr_int % 2 == 0] *= -1
+
+# Calculate diagonal sum of 3x3 matrix
+diagonal_sum = np.trace(matrix)
+
+# Find indices of non-zero elements
+non_zero_indices = np.nonzero(np.array([1, 2, 0, 0, 4, 0]))
+
+# Reverse a 1D array
+reversed_array = arr_int[::-1]
+
+# Reshape 1D array to 2D array with 5 rows and 2 columns
+
+# Stack two arrays vertically
+stacked_array = np.vstack((arr_int, reversed_array))
+
+# Get common items between two arrays
+common_items = np.intersect1d(arr_int, reversed_array)
+
+# Create 5x5 matrix with row values ranging from 0 to 4
+matrix_rows = np.arange(5).reshape(1, -1).repeat(5, axis=0)
+
+# Find index of maximum value in 1D array
+max_index = np.argmax(arr_int)
+
+# Calculate mean of each row in 2D array
+row_means = np.mean(matrix, axis=1)
+
+# Extract diagonal elements from 4x4 matrix
+random_matrix = np.random.rand(4, 4)
+diagonal_elements = np.diag(random_matrix)
+
+# Count occurrences of a specific value
+value_count = np.count_nonzero(arr_int == 5)
+
+# Find indices where elements of two arrays match
+matching_indices = np.where(arr_int == reversed_array)[0]
+
+# Matrix multiplication
+matrix_product = np.dot(random_matrix, np.random.rand(4, 2))
+# Array R from array Z
+Z = np.arange(1, 15)
+# Read data from txt file
+
+# Create random matrix and threshold values
+random_matrix = np.random.rand(3, 3)
+thresholded_matrix = np.where(random_matrix > 0.5, 1, 0)
+
+# Create 2D array and replace max with min
+random_2d = np.random.rand(5, 5)
