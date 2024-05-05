@@ -1,0 +1,42 @@
+
+class Solution:
+
+    def threeSumClosest(self, A, B):
+
+        if len(A) < 3:
+
+            return 0
+
+        A.sort()  
+
+        closest_sum = float('inf')  
+
+        for i in range(len(A) - 2):
+
+            left = i + 1
+
+            right = len(A) - 1
+
+            while left < right:
+
+                current_sum = A[i] + A[left] + A[right]
+
+                if abs(B - current_sum) < abs(B - closest_sum):
+
+                    closest_sum = current_sum
+
+                if current_sum > B:
+
+                    right -= 1
+
+                elif current_sum < B:
+
+                    left += 1
+
+                else:
+
+                    return B
+
+        return closest_sum
+
+
