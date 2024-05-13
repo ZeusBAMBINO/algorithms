@@ -1,12 +1,26 @@
+def can_fit_diplomas(w, h, n, side_length):
+    diplomas_per_row = side_length // w
+    diplomas_per_col = side_length // h
+
+    total_diplomas = diplomas_per_row * diplomas_per_col
+
+    return total_diplomas >= n
+
 def min_board_size(w, h, n):
-    max_width = max(w, h)
+    left = 1
+    right = max(w, h) * n
 
-    min_side = max_width * (n ** 0.5)
+    while left < right:
+        mid = (left + right) // 2
+        if can_fit_diplomas(w, h, n, mid):
+            right = mid
+        else:
+            left = mid + 1
 
-    return int(min_side)
+    return left
 
-w = 5
-h = 5
-n = 3
+w = 3
+h = 4
+n = 10
 result = min_board_size(w, h, n)
 print(result)
