@@ -1,0 +1,20 @@
+def min_weight_difference(N, weights):
+    def calculate_min_difference(total_weight, idx, curr_weight):
+        if idx == N:
+            return abs(total_weight - 2 * curr_weight)
+
+        include = calculate_min_difference(total_weight, idx + 1, curr_weight + weights[idx])
+
+        exclude = calculate_min_difference(total_weight, idx + 1, curr_weight)
+
+        return min(include, exclude)
+
+    total_weight = sum(weights)
+    return calculate_min_difference(total_weight, 0, 0)
+
+
+N = 5
+weights = [10, 20, 30, 40,45 ]
+
+result = min_weight_difference(N, weights)
+print(result)
