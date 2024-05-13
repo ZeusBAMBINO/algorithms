@@ -1,0 +1,12 @@
+def min_board_size(w, h, n):
+    max_width = max(w, h)
+
+    min_side = max_width * (n ** 0.5)
+
+    return int(min_side)
+
+w = 5
+h = 5
+n = 3
+result = min_board_size(w, h, n)
+print(result)
